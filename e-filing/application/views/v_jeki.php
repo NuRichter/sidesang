@@ -98,7 +98,7 @@
 		<p class="hai">Jek,</p>
 		<p>Ini Sidesang. Dari idemu yang dulu cuma obrolan, sekarang udah jadi beneran. Udah online, udah dipakai buat ngurus arsip surat di Desa Bulukandang.</p>
 		<p>Bagian teknisnya udah aku kelarin. Sisanya giliran kamu. Skripsi itu dikelarin juga ya, jangan ditunda terus. Pelan nggak apa-apa, yang penting jalan.</p>
-		<p>Kalau nanti udah kelar, kabarin. Biar aku ikut seneng.</p>
+		<p>Kalau nanti udah kelar, kabarin. Biar tongkrongan ikut seneng.</p>
 		<p class="sign">Semangat, Jek.</p>
 		<p class="ps">P.S. Yang nitip semangat biar kamu nggak mager: <b>Ibnu toolkit</b>, <b>Gatra jomok</b>, <b>Ibnu kedua</b>, <b>Raffan rudal iran</b>, dan teman-teman lainnya yang nggak bisa disebutin satu per dua.</p>
 		<div class="foot">
