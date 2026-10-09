@@ -1,0 +1,6 @@
+.git
+.vercel
+*.log
+.env*
+composer.json
+composer.lock

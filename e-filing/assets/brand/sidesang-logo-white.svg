@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">
+  <g transform="translate(20,20) scale(0.625)">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16A374"/><stop offset="1" stop-color="#0B6E4F"/>
+    </linearGradient>
+  </defs>
+  <rect height="512" width="512" rx="112" fill="url(#g)"/>
+  <path d="M104 172q0-26 26-26h92q11 0 19 8l22 22h119q26 0 26 26v40H104z" fill="#D7F2E6"/>
+  <rect x="128" y="190" width="256" height="34" rx="10" fill="#FFFFFF" opacity=".55"/>
+  <rect x="88" y="214" width="336" height="186" rx="26" fill="#FFFFFF"/>
+  <rect x="88" y="214" width="336" height="18" rx="9" fill="#F2B705"/>
+  <text x="256" y="372" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="168" font-weight="800" fill="#0B6E4F">S</text>
+</g>
+  <text x="372" y="190" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="150" font-weight="800" letter-spacing="2" fill="#FFFFFF">SIDESANG</text>
+  <rect x="378" y="216" width="120" height="10" rx="5" fill="#F2B705"/>
+  <text x="378" y="300" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="58" font-weight="600" fill="#D7F2E6">Arsip Desa Bulukandang</text>
+</svg>

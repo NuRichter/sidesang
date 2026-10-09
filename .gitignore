@@ -1,0 +1,10 @@
+# PHP portable lokal (unduh sendiri, lihat README)
+/tools/php/
+# Vercel & rahasia
+.vercel/
+.env*
+*.log
+# Data MySQL lokal & sementara
+.data-mysql/
+Thumbs.db
+.DS_Store

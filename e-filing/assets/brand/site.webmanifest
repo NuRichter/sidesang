@@ -1,0 +1,27 @@
+{
+  "name": "Sidesang (Arsip Desa Bulukandang)",
+  "short_name": "Sidesang",
+  "description": "Sistem arsip elektronik surat masuk dan surat keluar Pemerintah Desa Bulukandang",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0B6E4F",
+  "icons": [
+    {
+      "src": "/assets/brand/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/brand/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/brand/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
