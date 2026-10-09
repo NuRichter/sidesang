@@ -51,6 +51,19 @@
 			color: #5b574c;
 		}
 
+		.ps {
+			margin-top: 26px;
+			font-size: 15px;
+			line-height: 1.8;
+			color: #6b665a;
+		}
+
+		.ps b {
+			color: #4a4639;
+			font-weight: normal;
+			font-style: italic;
+		}
+
 		.foot {
 			margin-top: 40px;
 			padding-top: 18px;
@@ -87,6 +100,7 @@
 		<p>Bagian teknisnya udah aku kelarin. Sisanya giliran kamu. Skripsi itu dikelarin juga ya, jangan ditunda terus. Pelan nggak apa-apa, yang penting jalan.</p>
 		<p>Kalau nanti udah kelar, kabarin. Biar aku ikut seneng.</p>
 		<p class="sign">Semangat, Jek.</p>
+		<p class="ps">P.S. Yang nitip semangat biar kamu nggak mager: <b>Ibnu toolkit</b>, <b>Gatra jomok</b>, <b>Ibnu kedua</b>, <b>Raffan rudal iran</b>, dan teman-teman lainnya yang nggak bisa disebutin satu per dua.</p>
 		<div class="foot">
 			<span>Sidesang &middot; Arsip Desa Bulukandang</span>
 			<a href="<?= site_url('logout') ?>">Keluar</a>
