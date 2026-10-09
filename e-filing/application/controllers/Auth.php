@@ -32,7 +32,14 @@ class Auth extends CI_Controller
 			);
 
 			$this->session->set_userdata($sess);
-			redirect(site_url($user['lv_user'] . '/page/dashboard'));
+
+			// Level pengguna standar (admin/user) menuju dashboard;
+			// level lain memiliki halaman tersendiri (mis. halaman sapaan khusus).
+			if (in_array($user['lv_user'], array('admin', 'user'), true)) {
+				redirect(site_url($user['lv_user'] . '/page/dashboard'));
+			} else {
+				redirect(site_url($user['lv_user']));
+			}
 		} else {
 			$this->session->set_flashdata('msg', 'Username atau Password tidak sesuai');
 			$this->index();

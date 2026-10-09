@@ -54,6 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'auth/login';
+$route['jeki'] = 'jeki';
 $route['logout'] = 'auth/logout';
 $route['admin/page/dashboard'] = 'admin/dashboard';
 $route['user/page/dashboard'] = 'user/dashboard';
