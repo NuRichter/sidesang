@@ -20,7 +20,7 @@ class Users extends MY_Controller
     public function index()
     {
         $this->admin_gate();
-        $this->render('users/list', array('title' => 'Data User'));
+        $this->render('users/list', array('title' => 'Data User', 'plugins' => array('datatables'), 'rows' => $this->m_user->all_with_tupoksi()));
     }
 
     public function data()
@@ -58,7 +58,7 @@ class Users extends MY_Controller
     public function tambah()
     {
         $this->admin_gate();
-        $this->render('users/form', array('title' => 'Tambah User', 'mode' => 'tambah', 'tupoksi' => $this->m_tupoksi->all(), 'u' => null));
+        $this->render('users/form', array('title' => 'Tambah User', 'mode' => 'tambah', 'tupoksi' => $this->m_tupoksi->all(), 'u' => null, 'plugins' => array('select2')));
     }
 
     public function edit($id)
@@ -66,7 +66,7 @@ class Users extends MY_Controller
         $this->admin_gate();
         $u = $this->m_user->find_by_id($id);
         if (!$u) show_404();
-        $this->render('users/form', array('title' => 'Edit User', 'mode' => 'edit', 'tupoksi' => $this->m_tupoksi->all(), 'u' => $u));
+        $this->render('users/form', array('title' => 'Edit User', 'mode' => 'edit', 'tupoksi' => $this->m_tupoksi->all(), 'u' => $u, 'plugins' => array('select2')));
     }
 
     private function upload_foto(&$err, $id = null)
@@ -130,6 +130,9 @@ class Users extends MY_Controller
         if ($id_tupoksi && !$this->m_tupoksi->get($id_tupoksi)) {
             $this->json(array('status' => false, 'text' => 'Tupoksi tidak valid.'));
         }
+        if ($this->input->post('akses', true) === 'user' && !$id_tupoksi) {
+            $this->json(array('status' => false, 'text' => 'User biasa wajib memiliki tupoksi (menentukan dokumen yang dapat diakses).'));
+        }
         $foto = $this->upload_foto($err);
         if ($err) $this->json(array('status' => false, 'text' => $err));
 
@@ -170,6 +173,9 @@ class Users extends MY_Controller
         $id_tupoksi = (int)$this->input->post('id_tupoksi', true) ?: null;
         if ($id_tupoksi && !$this->m_tupoksi->get($id_tupoksi)) {
             $this->json(array('status' => false, 'text' => 'Tupoksi tidak valid.'));
+        }
+        if ($akses === 'user' && !$id_tupoksi) {
+            $this->json(array('status' => false, 'text' => 'User biasa wajib memiliki tupoksi (menentukan dokumen yang dapat diakses).'));
         }
         $foto = $this->upload_foto($err);
         if ($err) $this->json(array('status' => false, 'text' => $err));

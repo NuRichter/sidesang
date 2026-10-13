@@ -10,14 +10,21 @@
         </footer>
     </div>
 
+<?php $plugins = isset($plugins) ? (array)$plugins : array(); ?>
     <script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('assets/dist/js/adminlte.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
     <script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
+    <?php if (in_array('datatables', $plugins)): ?>
+        <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+        <script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+    <?php endif; ?>
+    <?php if (in_array('select2', $plugins)): ?>
+        <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js') ?>"></script>
+    <?php endif; ?>
+    <?php if (in_array('datepicker', $plugins)): ?>
+        <script src="<?= base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
+    <?php endif; ?>
     <script>
         // CSRF untuk semua request AJAX
         var CSRF = {name: $('meta[name=csrf-name]').attr('content'), hash: $('meta[name=csrf-hash]').attr('content')};

@@ -26,6 +26,8 @@ class M_dokumen extends CI_Model
     {
         if (empty($dok)) return false;
         if ($user['akses'] === 'admin') return true;
+        // user tanpa tupoksi tidak boleh mengakses dokumen apa pun
+        if (empty($user['id_tupoksi']) || empty($dok['id_tupoksi'])) return false;
         return (int)$dok['id_tupoksi'] === (int)$user['id_tupoksi'];
     }
 

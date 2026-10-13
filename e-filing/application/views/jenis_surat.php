@@ -15,7 +15,20 @@
                         <th class="text-center" style="width:180px">Aksi</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <?php $no = 0;
+                    foreach ($rows as $r): $no++; ?>
+                        <tr>
+                            <td class="text-center"><?= $no ?></td>
+                            <td><?= h($r['nama_jenis']) ?></td>
+                            <td><?= h($r['keterangan']) ?></td>
+                            <td class="text-center text-nowrap">
+                                <button class="btn btn-sm btn-success btn-edit" data-id="<?= (int)$r['id_jenis'] ?>"><i class="fa fa-edit"></i> Edit</button>
+                                <button class="btn btn-sm btn-danger btn-hapus" data-id="<?= (int)$r['id_jenis'] ?>"><i class="fa fa-trash"></i> Delete</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>

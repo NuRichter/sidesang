@@ -26,10 +26,19 @@ class MY_Controller extends CI_Controller
         if (!logged_in()) {
             return $this->bounce();
         }
-        // verifikasi ulang akun & role dari DB
-        $db = $this->m_user->find_by_id(current_user('id_user'));
+        // verifikasi ulang akun & role dari DB (data ringan)
+        $db = $this->m_user->find_auth(current_user('id_user'));
         if (!$db || $db['akses'] !== current_user('akses') || $db['email'] !== current_user('email')) {
             return $this->kill_session();
+        }
+        // segarkan tupoksi/foto di session bila admin mengubahnya
+        if ($db['id_tupoksi'] != current_user('id_tupoksi') || $db['nama_tupoksi'] != current_user('tupoksi') || $db['foto'] != current_user('foto')) {
+            $this->session->set_userdata(array(
+                'id_tupoksi' => $db['id_tupoksi'],
+                'tupoksi' => $db['nama_tupoksi'],
+                'foto' => $db['foto'],
+                'nama' => $db['nama'],
+            ));
         }
         // akun jeki hanya boleh di tab khusus
         if ($db['akses'] === 'jeki') {

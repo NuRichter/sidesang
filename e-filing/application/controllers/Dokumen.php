@@ -12,8 +12,11 @@ class Dokumen extends MY_Controller
 
     private function access_filter()
     {
-        // admin melihat semua; user hanya tupoksinya
-        return is_admin() ? null : current_user('id_tupoksi');
+        // admin melihat semua; user hanya tupoksinya.
+        // user tanpa tupoksi TIDAK melihat dokumen apa pun (sentinel -1).
+        if (is_admin()) return null;
+        $t = current_user('id_tupoksi');
+        return $t ? (int)$t : -1;
     }
 
     public function index()
@@ -21,6 +24,7 @@ class Dokumen extends MY_Controller
         $this->render('dokumen/list', array(
             'title' => 'Data Dokumen',
             'jenis' => $this->m_jenis->all(),
+            'plugins' => array('datatables'),
         ));
     }
 
@@ -76,6 +80,7 @@ class Dokumen extends MY_Controller
             'mode' => 'tambah',
             'jenis' => $this->m_jenis->all(),
             'dok' => null,
+            'plugins' => array('select2', 'datepicker'),
         ));
     }
 
@@ -89,6 +94,7 @@ class Dokumen extends MY_Controller
             'mode' => 'edit',
             'jenis' => $this->m_jenis->all(),
             'dok' => $dok,
+            'plugins' => array('select2', 'datepicker'),
         ));
     }
 

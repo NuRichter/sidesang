@@ -19,7 +19,26 @@
                         <th class="text-center" style="width:150px">Aksi</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <?php $no = 0;
+                    foreach ($rows as $r): $no++;
+                        $badge = $r['akses'] === 'admin' ? 'primary' : ($r['akses'] === 'jeki' ? 'dark' : 'secondary'); ?>
+                        <tr>
+                            <td class="text-center"><?= $no ?></td>
+                            <td><?= h($r['nama']) ?></td>
+                            <td><?= h($r['email']) ?></td>
+                            <td><span class="text-muted">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></td>
+                            <td><span class="badge badge-<?= $badge ?>"><?= h(ucfirst($r['akses'])) ?></span></td>
+                            <td><?= h($r['nama_tupoksi']) ?: '-' ?></td>
+                            <td class="text-center"><img src="<?= avatar_url($r['id_user'], $r['foto']) ?>" class="earsip-avatar"></td>
+                            <td class="text-center text-nowrap">
+                                <a href="<?= site_url('users/edit/' . $r['id_user']) ?>" class="btn btn-sm btn-success" title="Edit"><i class="fa fa-edit"></i></a>
+                                <button class="btn btn-sm btn-warning btn-reset" data-id="<?= (int)$r['id_user'] ?>" title="Reset Password"><i class="fa fa-key"></i></button>
+                                <button class="btn btn-sm btn-danger btn-hapus" data-id="<?= (int)$r['id_user'] ?>" data-nama="<?= h($r['nama']) ?>" title="Hapus"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>

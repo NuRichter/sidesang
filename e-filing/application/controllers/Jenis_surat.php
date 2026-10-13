@@ -12,7 +12,7 @@ class Jenis_surat extends MY_Controller
 
     public function index()
     {
-        $this->render('jenis_surat', array('title' => 'Jenis Surat'));
+        $this->render('jenis_surat', array('title' => 'Jenis Surat', 'plugins' => array('datatables'), 'rows' => $this->m_jenis->all()));
     }
 
     public function data()

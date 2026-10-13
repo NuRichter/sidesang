@@ -12,7 +12,7 @@ class Tupoksi extends MY_Controller
 
     public function index()
     {
-        $this->render('tupoksi', array('title' => 'Tupoksi'));
+        $this->render('tupoksi', array('title' => 'Tupoksi', 'plugins' => array('datatables'), 'rows' => $this->m_tupoksi->all()));
     }
 
     public function data()

@@ -16,12 +16,19 @@ function navcls($view, $current)
     <meta name="csrf-hash" content="<?= $this->security->get_csrf_hash() ?>">
     <title>E-Arsip | <?= h($_title) ?></title>
     <link rel="icon" type="image/png" href="<?= base_url('assets/brand/favicon-32x32.png') ?>">
+<?php $plugins = isset($plugins) ? (array)$plugins : array(); ?>
     <link rel="stylesheet" href="<?= base_url('assets/plugins/fontawesome-free/css/all.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/dist/css/adminlte.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/plugins/sweetalert2/sweetalert2.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/plugins/select2/css/select2.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>">
+    <?php if (in_array('datatables', $plugins)): ?>
+        <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
+    <?php endif; ?>
+    <?php if (in_array('select2', $plugins)): ?>
+        <link rel="stylesheet" href="<?= base_url('assets/plugins/select2/css/select2.min.css') ?>">
+    <?php endif; ?>
+    <?php if (in_array('datepicker', $plugins)): ?>
+        <link rel="stylesheet" href="<?= base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>">
+    <?php endif; ?>
     <link rel="stylesheet" href="<?= base_url('assets/dist/css/earsip.css') ?>">
 </head>
 

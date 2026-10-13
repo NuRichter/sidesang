@@ -15,6 +15,17 @@ class M_user extends CI_Model
         return $this->db->get_where($this->table, array('id_user' => (int)$id))->row_array();
     }
 
+    /** Data ringan untuk verifikasi auth tiap request (tanpa kolom password/BLOB). */
+    public function find_auth($id)
+    {
+        return $this->db
+            ->select('u.id_user, u.nama, u.email, u.akses, u.id_tupoksi, u.foto, t.nama_tupoksi')
+            ->from($this->table . ' u')
+            ->join('tupoksi t', 't.id_tupoksi = u.id_tupoksi', 'left')
+            ->where('u.id_user', (int)$id)
+            ->get()->row_array();
+    }
+
     /** Verifikasi kredensial. Return row user bila cocok, FALSE bila tidak. */
     public function verify($email, $password)
     {
@@ -55,6 +66,17 @@ class M_user extends CI_Model
     public function delete($id)
     {
         return $this->db->where('id_user', (int)$id)->delete($this->table);
+    }
+
+    /** Semua user + nama tupoksi (untuk tabel client-side, tanpa password/BLOB). */
+    public function all_with_tupoksi()
+    {
+        return $this->db
+            ->select('u.id_user, u.nama, u.email, u.akses, u.foto, t.nama_tupoksi')
+            ->from($this->table . ' u')
+            ->join('tupoksi t', 't.id_tupoksi = u.id_tupoksi', 'left')
+            ->order_by('u.nama', 'asc')
+            ->get()->result_array();
     }
 
     // ---------------- foto (disimpan di DB) ----------------
