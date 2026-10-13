@@ -51,7 +51,7 @@ switch ($ver) {
 			'port' => 3306,
 			'username' => 'root',
 			'password' => '',
-			'database' => 'db_e-filing',
+			'database' => 'db_earsip',
 			'dbdriver' => 'mysqli',
 			'db_ssl' => FALSE
 		);

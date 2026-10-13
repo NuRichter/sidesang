@@ -61,11 +61,15 @@ if errorlevel 1 (
 	goto tunggu
 )
 
-"%MYSQL_BIN%\mysql.exe" -uroot -h127.0.0.1 -P%DB_PORT% -e "USE `db_e-filing`" >nul 2>nul
+"%MYSQL_BIN%\mysql.exe" -uroot -h127.0.0.1 -P%DB_PORT% -e "USE `db_earsip`" >nul 2>nul
 if errorlevel 1 (
-	echo Mengimpor database awal...
-	"%MYSQL_BIN%\mysql.exe" -uroot -h127.0.0.1 -P%DB_PORT% < "database\db_e-filing.sql"
-	"%MYSQL_BIN%\mysql.exe" -uroot -h127.0.0.1 -P%DB_PORT% db_e-filing < "database\tambahan_vercel.sql"
+	echo Mengimpor database awal E-Arsip...
+	"%MYSQL_BIN%\mysql.exe" -uroot -h127.0.0.1 -P%DB_PORT% -e "CREATE DATABASE IF NOT EXISTS `db_earsip` DEFAULT CHARACTER SET utf8mb4"
+	"%MYSQL_BIN%\mysql.exe" -uroot -h127.0.0.1 -P%DB_PORT% db_earsip < "database\earsip.sql"
+	set DB_HOST=127.0.0.1
+	set DB_USER=root
+	set DB_NAME=db_earsip
+	"%PHP_EXE%" database\seed.php --yes
 )
 
 REM ---------- 2. Jalankan aplikasi ----------
@@ -73,7 +77,7 @@ set CI_ENV=production
 set DB_HOST=127.0.0.1
 set DB_USER=root
 set DB_PASS=
-set DB_NAME=db_e-filing
+set DB_NAME=db_earsip
 
 echo.
 echo ================================================================

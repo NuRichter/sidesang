@@ -3,52 +3,66 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->model('M_login', 'm_login');
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('M_user', 'm_user');
+    }
 
-	public function index()
-	{
-		$data['page'] = 'v_login';
+    public function index()
+    {
+        if (logged_in()) {
+            redirect(site_url(current_user('akses') === 'jeki' ? 'jeki' : 'beranda'));
+        }
+        $this->load->view('login');
+    }
 
-		$this->load->view('v_login');
-	}
+    public function proses()
+    {
+        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() === false) {
+            $this->session->set_flashdata('login_error', 'Username dan password wajib diisi.');
+            redirect(site_url('login'));
+            return;
+        }
 
-	public function login()
-	{
-		$username = input('username');
-		$password = md5(input('password'));
+        $email = $this->input->post('username', true);
+        $password = (string)$this->input->post('password', false);
+        $user = $this->m_user->verify($email, $password);
 
-		$check = $this->m_login->login($username, $password);
-		if ($check > 0) {
-			$user = $this->m_login->get_user($username);
-			$sess = array(
-				'username' => $user['username'],
-				'nama_user' => $user['nm_user'],
-				'lv_user' => $user['lv_user'],
-				'is_login' => true
-			);
+        if (!$user) {
+            $this->session->set_flashdata('login_error', 'Username atau password tidak sesuai.');
+            redirect(site_url('login'));
+            return;
+        }
 
-			$this->session->set_userdata($sess);
+        $tupoksi = null;
+        if (!empty($user['id_tupoksi'])) {
+            $this->load->model('M_tupoksi', 'm_tupoksi');
+            $t = $this->m_tupoksi->get($user['id_tupoksi']);
+            $tupoksi = $t ? $t['nama_tupoksi'] : null;
+        }
 
-			// Level pengguna standar (admin/user) menuju dashboard;
-			// level lain memiliki halaman tersendiri (mis. halaman sapaan khusus).
-			if (in_array($user['lv_user'], array('admin', 'user'), true)) {
-				redirect(site_url($user['lv_user'] . '/page/dashboard'));
-			} else {
-				redirect(site_url($user['lv_user']));
-			}
-		} else {
-			$this->session->set_flashdata('msg', 'Username atau Password tidak sesuai');
-			$this->index();
-		}
-	}
+        // regenerasi session id untuk mencegah session fixation
+        $this->session->sess_regenerate(true);
+        $this->session->set_userdata(array(
+            'id_user'    => $user['id_user'],
+            'nama'       => $user['nama'],
+            'email'      => $user['email'],
+            'akses'      => $user['akses'],
+            'id_tupoksi' => $user['id_tupoksi'],
+            'tupoksi'    => $tupoksi,
+            'foto'       => $user['foto'],
+            'is_login'   => true,
+        ));
 
-	public function logout()
-	{
-		session_destroy();
-		redirect(base_url());
-	}
+        redirect(site_url($user['akses'] === 'jeki' ? 'jeki' : 'beranda'));
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(site_url('login'));
+    }
 }
